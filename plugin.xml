@@ -1,9 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-<plugin
-    xmlns="http://www.phonegap.com/ns/plugins/1.0"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    id="cordova-plugin-bluetooth-serial"
-    version="0.4.7">
+<?xml version="1.0" encoding="utf-8" ?>
+<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android" id="cordova-plugin-bluetooth-serial" version="0.4.8">
 
     <name>Bluetooth Serial</name>
     <description>Bluetooth Serial Communication Plugin</description>
@@ -20,19 +16,18 @@
 
         <config-file target="res/xml/config.xml" parent="/widget">
             <feature name="BluetoothSerial">
-                <param name="android-package" value="com.megster.cordova.BluetoothSerial"/>
+                <param name="android-package" value="com.megster.cordova.BluetoothSerial" />
             </feature>
         </config-file>
 
-        <source-file src="src/android/com/megster/cordova/BluetoothSerial.java"
-            target-dir="src/com/megster/cordova"/>
-        <source-file src="src/android/com/megster/cordova/BluetoothSerialService.java"
-            target-dir="src/com/megster/cordova"/>
+        <source-file src="src/android/com/megster/cordova/BluetoothSerial.java" target-dir="src/com/megster/cordova" />
+        <source-file src="src/android/com/megster/cordova/BluetoothSerialService.java" target-dir="src/com/megster/cordova" />
 
         <config-file target="AndroidManifest.xml" parent="/manifest">
             <uses-permission android:name="android.permission.BLUETOOTH" />
             <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
             <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+            <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
         </config-file>
 
     </platform>
@@ -41,7 +36,7 @@
 
         <config-file target="config.xml" parent="/widget">
             <feature name="BluetoothSerial">
-                <param name="ios-package" value="MEGBluetoothSerial" onload="true"/>
+                <param name="ios-package" value="MEGBluetoothSerial" onload="true" />
             </feature>
         </config-file>
 
@@ -62,18 +57,18 @@
 
     <platform name="wp8">
         <config-file target="config.xml" parent="/*">
-             <feature name="BluetoothSerial">
-                 <param name="wp-package" value="BluetoothSerial"/>
-             </feature>
-         </config-file>
+            <feature name="BluetoothSerial">
+                <param name="wp-package" value="BluetoothSerial" />
+            </feature>
+        </config-file>
 
 
-         <config-file target="Properties/WMAppManifest.xml" parent="/Deployment/App/Capabilities">
-             <Capability Name="ID_CAP_PROXIMITY" />
-         </config-file>
+        <config-file target="Properties/WMAppManifest.xml" parent="/Deployment/App/Capabilities">
+            <Capability Name="ID_CAP_PROXIMITY" />
+        </config-file>
 
-         <source-file src="src/wp/BluetoothSerial.cs" />
-         <source-file src="src/wp/BluetoothConnectionManager.cs" />
+        <source-file src="src/wp/BluetoothSerial.cs" />
+        <source-file src="src/wp/BluetoothConnectionManager.cs" />
 
     </platform>
 

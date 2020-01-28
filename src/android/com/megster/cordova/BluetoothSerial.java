@@ -17,6 +17,7 @@ import android.util.Log;
 import org.apache.cordova.CordovaArgs;
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CallbackContext;
+import org.apache.cordova.PermissionHelper;
 import org.apache.cordova.PluginResult;
 import org.apache.cordova.LOG;
 import org.json.JSONArray;
@@ -86,7 +87,9 @@ public class BluetoothSerial extends CordovaPlugin {
 
     // Android 23 requires user to explicitly grant permission for location to discover unpaired
     private static final String ACCESS_COARSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
+    private static final String ACCESS_FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
     private static final int CHECK_PERMISSIONS_REQ_CODE = 2;
+    private static String [] permissions = { ACCESS_COARSE_LOCATION, ACCESS_FINE_LOCATION };
     private CallbackContext permissionCallback;
 
     @Override
@@ -213,11 +216,11 @@ public class BluetoothSerial extends CordovaPlugin {
 
         } else if (action.equals(DISCOVER_UNPAIRED)) {
 
-            if (cordova.hasPermission(ACCESS_COARSE_LOCATION)) {
+            if (hasPermission()) {
                 discoverUnpairedDevices(callbackContext);
             } else {
                 permissionCallback = callbackContext;
-                cordova.requestPermission(this, CHECK_PERMISSIONS_REQ_CODE, ACCESS_COARSE_LOCATION);
+                requestPermissions(0);
             }
 
         } else if (action.equals(SET_DEVICE_DISCOVERED_LISTENER)) {
@@ -486,5 +489,19 @@ public class BluetoothSerial extends CordovaPlugin {
                 discoverUnpairedDevices(permissionCallback);
                 break;
         }
+    }
+
+    public boolean hasPermission() {
+        for (String p : permissions) {
+            if (!PermissionHelper.hasPermission(this, p)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public void requestPermissions(int requestCode)
+    {
+        PermissionHelper.requestPermissions(this, requestCode, permissions);
     }
 }
