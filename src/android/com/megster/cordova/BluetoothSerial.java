@@ -220,7 +220,7 @@ public class BluetoothSerial extends CordovaPlugin {
                 discoverUnpairedDevices(callbackContext);
             } else {
                 permissionCallback = callbackContext;
-                requestPermissions(0);
+                requestPermissions(CHECK_PERMISSIONS_REQ_CODE);
             }
 
         } else if (action.equals(SET_DEVICE_DISCOVERED_LISTENER)) {
